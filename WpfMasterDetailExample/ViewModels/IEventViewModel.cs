@@ -2,8 +2,9 @@
 
 namespace WpfMasterDetailExample.ViewModels
 {
-    public interface IEventViewModel
+    public interface IEventViewModel : IViewModel
     {
+        string Name { get; set; }
         ObservableCollection<IRespondingUnitViewModel> RespondingUnits { get; }
     }
 }

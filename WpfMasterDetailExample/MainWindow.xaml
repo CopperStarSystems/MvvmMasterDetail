@@ -4,14 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMasterDetailExample"
+        xmlns:viewModels="clr-namespace:WpfMasterDetailExample.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Master-Detail Example" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" ItemsSource="{Binding ActiveEvents}"/>
-        <ListView Grid.Column="1" ItemsSource="{Binding SelectedEvent}"/>
+        <DockPanel Grid.Column="0">
+            <Label Content="Emergency Events" DockPanel.Dock="Top"/>
+            <ListView ItemsSource="{Binding ActiveEvents}" SelectedItem="{Binding SelectedEvent}">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:EventViewModel}">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Label Content="Responding Units" DockPanel.Dock="Top"/>
+            <ListView ItemsSource="{Binding SelectedEvent.RespondingUnits}">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:RespondingUnitViewModel}">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
     </Grid>
 </Window>

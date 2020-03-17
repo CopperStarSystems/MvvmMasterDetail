@@ -1,6 +1,6 @@
 ﻿namespace WpfMasterDetailExample.ViewModels
 {
-    public interface IRespondingUnitViewModel
+    public interface IRespondingUnitViewModel : IViewModel
     {
         string Name { get; set; }
     }
